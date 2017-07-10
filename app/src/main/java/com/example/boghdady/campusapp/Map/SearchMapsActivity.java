@@ -2,57 +2,46 @@ package com.example.boghdady.campusapp.Map;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.annotation.IntegerRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.boghdady.campusapp.MapsActivity;
-import com.example.boghdady.campusapp.NavigationDrawer.DoctorNavigationDrawer;
 import com.example.boghdady.campusapp.R;
-import com.example.boghdady.campusapp.Registeration.DoctorSignupActivity;
 import com.example.boghdady.campusapp.Retrofit.Interfaces;
 import com.example.boghdady.campusapp.Retrofit.Models;
 import com.example.boghdady.campusapp.Retrofit.Responses;
-import com.example.boghdady.campusapp.Retrofit.SentBody;
 import com.example.boghdady.campusapp.helper.Constants;
-import com.example.boghdady.campusapp.helper.SharedPref;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -80,6 +69,10 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         LocationListener {
 
     private GoogleMap mMap;
+    public Polyline SCU_Boundary;
+    //  SCU latitude and longitude coordinates
+    LatLng SCU_Location = new LatLng(30.623109, 32.2729409);
+
     final int MY_LOCATION_REQUEST_CODE = 25;
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
@@ -116,7 +109,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
                 if (originPlace != null) {
 
                     destinationName = t.getText().toString();
-                   searchedPlace = getIdFromPlaces(t.getText());
+                    searchedPlace = getIdFromPlaces(t.getText());
                     drawRoute(originPlace, searchedPlace, destinationName);
                 }
                 //Toast.makeText(SearchMapsActivity.this, getIdFromPlaces(t.getText()) + "", Toast.LENGTH_SHORT).show();
@@ -157,8 +150,56 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        //addMarker(30.62116, 32.2684);
+//        //add style to the map using json
+//        boolean success = mMap.setMapStyle(new MapStyleOptions(getResources()
+//                .getString(R.string.style_json)));
+//        if (!success) {
+//
+//            Log.e(TAG, "Style parsing failed.");
+//
+//        }
+        //make Zoom (In/Out) Buttons appear
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        //  SCU latitude and longitude coordinates
+        //  LatLng SCU_Location = new LatLng(30.623109, 32.2729409);
+
+        moveCameraPosition(SCU_Location);
+        //Put SCU Boundary on Google map
+        drawSCU_Boundary();
+        // put func at dynamic zoom level detected
+        handleZoom_GroundOverlay_Boundary();
+// handle Zoom level between roundOverlay and Boundary when << Camera change >>
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+
+
+                handleZoom_GroundOverlay_Boundary();
+
+            }
+        });
+
+
+        //After Click on GroundOverlay
+        // Zoom in SCU and remove GroundOverlay
+        mMap.setOnGroundOverlayClickListener(new GoogleMap.OnGroundOverlayClickListener() {
+            @Override
+            public void onGroundOverlayClick(GroundOverlay groundOverlay) {
+                moveCameraIn();
+                /*need twice click to remove GroundOverlay
+                  groundOverlay.remove(); */
+                //cleared the complete set of overlays using
+                mMap.clear();
+
+
+                drawSCU_Boundary();
+            }
+
+        });
+/*
+//------old at onMaoReady
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -169,6 +210,21 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
 
     }
+}*/
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        //mMap.setMyLocationEnabled(true);
+
+    }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -524,5 +580,122 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
     private LatLng getIdFromPlaces(CharSequence text) {
 
         return places.get(text.toString());
+    }
+    //------------- last ------------
+       /* Draw Boundary of SCU
+          get latitude and longitude coordinates of pointes
+          https://developers.google.com/maps/documentation/utilities/polylineutility*/
+    public void drawSCU_Boundary() {
+        SCU_Boundary = mMap.addPolyline(new PolylineOptions()
+                .add(new LatLng(30.617601379370974, 32.25452899932861), new LatLng(30.615727045601805, 32.25506544113159))
+                .add(new LatLng(30.62100832664296, 32.28353977203369), new LatLng(30.615727045601805, 32.25506544113159))
+                .add(new LatLng(30.62100832664296, 32.28353977203369), new LatLng(30.623944298832274, 32.28301137685776))
+                .add(new LatLng(30.623944298832274, 32.28301137685776), new LatLng(30.627055593547315, 32.28206992149353))
+                .add(new LatLng(30.627055593547315, 32.28206992149353), new LatLng(30.62797880715714, 32.280235290527344))
+                .add(new LatLng(30.62797880715714, 32.280235290527344), new LatLng(30.62765568, 32.27997779))
+                .add(new LatLng(30.62765568, 32.27997779), new LatLng(30.62802, 32.27558))
+                .add(new LatLng(30.62802, 32.27558), new LatLng(30.62801, 32.27007))
+                .add(new LatLng(30.62801, 32.27007), new LatLng(30.62832, 32.26871))
+                .add(new LatLng(30.62832, 32.26871), new LatLng(30.62775, 32.26836))
+                .add(new LatLng(30.62775, 32.26836), new LatLng(30.62778, 32.26513))
+                .add(new LatLng(30.62778, 32.26513), new LatLng(30.62457, 32.26561))
+                .add(new LatLng(30.62457, 32.26561), new LatLng(30.62108, 32.26666))
+                .add(new LatLng(30.62108, 32.26666), new LatLng(30.61874, 32.25556))
+                .add(new LatLng(30.61874, 32.25556), new LatLng(30.617601379370974, 32.25452899932861))
+                .visible(true)
+                .width(5)
+                .color(Color.RED));
+        draw_polygon();
+    }
+    // .add(new LatLng(,),new LatLng(,))
+
+    //        //hide Boundary of SCU
+    public void hideSCU_Boundary() {
+        SCU_Boundary.setVisible(false);
+    }
+
+
+    /* Start app Camera ..
+    then move the camera to the place and Zoom =15f
+     bearing : Direction that the camera is pointing in, in degrees clockwise from north.
+     tilt : The angle, in degrees, of the camera angle from the nadir (directly facing the Earth).".tilt(65.5f)"*/
+    public void moveCameraPosition(LatLng location) {
+
+        CameraPosition currentPlace = new CameraPosition.Builder()
+                .target(location)
+                .bearing(270f).zoom(14f).build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPlace));
+    }
+
+    // move camera to focus on SCU more zoom in
+    public void moveCameraIn() {
+
+        CameraPosition currentPlace = new CameraPosition.Builder()
+                .target(SCU_Location)
+                .bearing(270f).zoom(15f).build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPlace));
+    }
+
+
+    // Add an overlay to the map, retaining a handle to the GroundOverlay object.
+    public void add_or_remove_GroundOverlay(LatLng location, Boolean condition) {
+        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+                .clickable(true)
+                .transparency(.7f)
+
+
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo))
+                //position(LatLng location, float width, float height)
+                .position(location, 2500f, 2500f);
+        GroundOverlay imageOverlay = mMap.addGroundOverlay(newarkMap);
+        if (condition == Boolean.FALSE) {
+            // remove a ground overlay
+            imageOverlay.remove();
+
+        } else {
+            mMap.addGroundOverlay(newarkMap);
+        }
+
+
+    }
+
+    public void handleZoom_GroundOverlay_Boundary() {
+
+
+        float zoom = mMap.getCameraPosition().zoom;
+        if (zoom < 15f) {
+            add_or_remove_GroundOverlay(SCU_Location, Boolean.TRUE);
+
+            if (
+                    SCU_Boundary.isVisible()) {
+                hideSCU_Boundary();
+            }
+
+        } else {
+            add_or_remove_GroundOverlay(SCU_Location, Boolean.FALSE);
+            mMap.clear();
+            drawSCU_Boundary();
+
+        }
+    }
+
+    // polygon and marker on fci
+    public void draw_polygon() {
+        Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                .add(new LatLng(30.62141, 32.26829), new LatLng(30.62104, 32.26882), new LatLng(30.62087, 32.26883), new LatLng(30.62098, 32.26832), new LatLng(30.62137, 32.26808))
+                .strokeColor(Color.RED)
+                .fillColor(Color.BLUE)
+                .visible(true));
+        //
+        LatLng fci_p = new LatLng(30.62108, 32.26843);
+        GroundOverlayOptions newarkMap2 = new GroundOverlayOptions()
+
+
+
+
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo))
+                //position(LatLng location, float width, float height)
+                .position(fci_p, 25f, 25f);
+        GroundOverlay imageOverlay2 = mMap.addGroundOverlay(newarkMap2);
     }
 }
