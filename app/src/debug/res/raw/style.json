@@ -1,5 +1,12 @@
 [
   {
+    "stylers": [
+      {
+        "color": "#1f2835"
+      }
+    ]
+  },
+  {
     "elementType": "geometry",
     "stylers": [
       {
@@ -36,7 +43,7 @@
     "featureType": "poi",
     "stylers": [
       {
-        "color": "#263d57"
+        "color": "#cee4ff"
       },
       {
         "visibility": "simplified"
