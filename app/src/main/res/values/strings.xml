@@ -8,10 +8,15 @@
     <string name="cancel">cancel</string>
     <string name="gallery">gallery</string>
     <string name="camera">camera</string>
+    <string name="select_time">ChoTime</string>
     <string name="perrmission">Please Enable All Perrmissions</string>
     <string name="categories">categories</string>
     <string name="new_user">New user? sign up now</string>
     <string name="phone_number">phone number</string>
+    <string name="my_account">My Profile</string>
+    <string name="save_updates">Save</string>
+    <string name="edit_image">Edit Image</string>
+    <string name="run_notification">Run Notification</string>
     <string name="create_account">create_account</string>
     <string name="already_user">already_user? sign in now</string>
     <string name="please_wait">Please wait...</string>
@@ -32,6 +37,10 @@
     <string name="plaese_enter_right_email">من فضلك ادخل ايميل صحيح</string>
     <string name="please_enter_right_user_name">من فضلك ادخل اسم مستخدم صحيح</string>
     <string name="please_enter_right_email">من فضلك ادخل ايميل صحيح</string>
+    <string name="please_enter_email">من فضلك ادخل الايميل </string>
+    <string name="please_enter_password">من فضلك ادخل الباسورد </string>
+    <string name="send_notification">Send Notification</string>
+
     <string name="add_photo">اضافة صورة</string>
     <string name="home_page">الصفحة الرئيسية</string>
     <string name="please_enter_phone">من فضلك ادخل رقم التليفون</string>
@@ -67,6 +76,7 @@
     <string name="free_halls">Free halls</string>
     <string name="schedule">schedule</string>
     <string name="share_app">Share app</string>
+    <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
     <string name="title_activity_maps">Map</string>
@@ -114,7 +124,7 @@
 
   </string>
     <string name="post_to">Send post to:</string>
-    <string name="year">Year</string>
+    <string name="subject">Subject</string>
     <string name="section">Section</string>
     <string name="send">Send</string>
     <string name="ok">Ok</string>

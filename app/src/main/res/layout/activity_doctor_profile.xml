@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layoutDirection="ltr"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.boghdady.campusapp.DoctorScreen.DoctorProfile"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <FrameLayout
+            android:id="@+id/editProfile_backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:layout_gravity="left|center"
+                android:src="@drawable/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <com.example.boghdady.campusapp.helper.CustomTextView
+            android:layout_width="wrap_content"
+            android:text="@string/my_account"
+            android:textColor="@color/defaultColor"
+            android:textSize="17sp"
+
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:src="@drawable/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+        <LinearLayout
+            android:id="@+id/activity_login"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            >
+            <RelativeLayout
+                android:id="@+id/relative_circle"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true">
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:civ_border_width="1dp"
+                    android:src="@drawable/profile_place_holder"
+                    android:id="@+id/profile_photo"
+
+                    android:foregroundGravity="center"
+                    app:civ_border_color="#fff"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+            <com.example.boghdady.campusapp.helper.CustomTextView
+                android:text="@string/edit_image"
+                android:textColor="@color/black"
+                android:id="@+id/edit_profile_photo"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <LinearLayout
+
+                android:orientation="horizontal"
+                android:id="@+id/signup_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:layout_marginRight="30dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="right|center_horizontal"
+                android:background="@drawable/login_container"
+                android:layout_marginTop="50dp">
+
+
+                <com.example.boghdady.campusapp.helper.CustomEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="@string/student_name"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textColorHint="#99a0ab"
+                    android:background="@android:color/transparent"
+                    android:paddingRight="10dp"
+                    android:textDirection="rtl"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    tools:ignore="RtlCompat"
+                    android:id="@+id/doctor_name"
+                    />
+                <ImageView
+                    android:src="@drawable/user"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:background="@drawable/login_container"
+
+                android:layout_marginRight="30dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp">
+
+
+                <com.example.boghdady.campusapp.helper.CustomEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="@string/email"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:textDirection="rtl"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="#99a0ab"
+                    android:paddingRight="10dp"
+                    android:gravity="center_vertical"
+                    tools:ignore="RtlCompat"
+                    android:id="@+id/doctor_email"
+                    android:inputType="textEmailAddress"/>
+                <ImageView
+
+                    android:src="@drawable/email"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:layout_marginRight="30dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/login_container"
+                android:layout_marginTop="10dp">
+
+
+                <com.example.boghdady.campusapp.helper.CustomEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="@string/password"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textColorHint="#99a0ab"
+                    android:paddingRight="10dp"
+                    android:gravity="right|center"
+                    android:textDirection="rtl"
+                    android:background="@android:color/transparent"
+
+                    tools:ignore="RtlCompat"
+                    android:id="@+id/doctor_password"
+                    android:inputType="textPassword"/>
+                <ImageView
+                    android:src="@drawable/lock"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:layout_marginRight="30dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/login_container"
+                android:layout_marginTop="10dp">
+
+
+                <com.example.boghdady.campusapp.helper.CustomEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="@string/phone_number"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textDirection="rtl"
+                    android:textColorHint="#99a0ab"
+                    android:paddingRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="right|center"
+                    tools:ignore="RtlCompat"
+                    android:id="@+id/doctor_phone_number"
+                    android:inputType="phone"/>
+                <ImageView
+                    android:src="@drawable/phone"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:weightSum="2"
+                android:layout_marginRight="30dp"
+                android:paddingRight="5dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/login_container"
+                android:layout_marginTop="10dp">
+
+
+                <com.example.boghdady.campusapp.helper.CustomEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Faculty Name"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textDirection="rtl"
+                    android:textColorHint="#99a0ab"
+                    android:paddingRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="right|center"
+                    tools:ignore="RtlCompat"
+                    android:id="@+id/doctor_faculty"
+                    android:inputType="phone"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <Switch
+                    android:textOn="On"
+                    android:textOff="Off"
+                    android:id="@+id/notificationSwitcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"/>
+
+                <com.example.boghdady.campusapp.helper.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/run_notification"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <com.example.boghdady.campusapp.helper.CustomButton
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_btn"
+                android:layout_width="match_parent"
+                android:text="@string/save_updates"
+                android:textColor="@color/white"
+                android:layout_marginLeft="70dp"
+                android:id="@+id/edit_profile_saveBtn"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="30dp"
+                android:layout_height="40dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:src="@drawable/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
+</LinearLayout>

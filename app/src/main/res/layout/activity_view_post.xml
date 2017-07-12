@@ -16,13 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:contentDescription="@string/docot_photo"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/sallam"/>
+                app:srcCompat="@drawable/sallam" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
@@ -46,17 +48,19 @@
             android:text="@string/post_content"
             android:textColor="@color/black" android:textSize="20sp"
         />
-        <com.example.boghdady.campusapp.helper.CustomTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/defaultColor"
-            android:drawableEnd="@drawable/download_icon"
-            android:drawableRight="@drawable/download_icon"
-            android:gravity="center_vertical"
-            android:hint="@string/open_attachment"
-            android:padding="5dp"
-            android:textSize="18sp"/>
 
-    </LinearLayout>
+    <com.example.boghdady.campusapp.helper.CustomTextView
+        android:id="@+id/customTextView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/defaultColor"
+        android:drawableEnd="@drawable/download_icon"
+        android:drawableRight="@drawable/download_icon"
+        android:gravity="center_vertical"
+        android:hint="@string/open_attachment"
+        android:padding="5dp"
+        android:textSize="18sp" />
+
+</LinearLayout>
 

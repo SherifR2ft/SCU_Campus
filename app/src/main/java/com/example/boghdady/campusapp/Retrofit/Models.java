@@ -7,15 +7,16 @@ package com.example.boghdady.campusapp.Retrofit;
 public class Models {
 
     public static class UserModel {
-        String User_ID, User_Email, User_Password, User_Image, User_Name, User_Phone, User_Faculty, Study_Year,
-                Department, User_Section, Checking;
+        String ID, User_Email, User_Password, User_Image, User_Name, User_Phone, User_Faculty, Study_Year,
+                Department, User_Section;
+        int Checking;
 
         public String getUser_ID() {
-            return User_ID;
+            return ID;
         }
 
         public void setUser_ID(String user_ID) {
-            User_ID = user_ID;
+            ID = user_ID;
         }
 
         public String getUser_Email() {
@@ -90,11 +91,19 @@ public class Models {
             User_Section = user_Section;
         }
 
-        public String getChecking() {
+        public String getID() {
+            return ID;
+        }
+
+        public void setID(String ID) {
+            this.ID = ID;
+        }
+
+        public int getChecking() {
             return Checking;
         }
 
-        public void setChecking(String checking) {
+        public void setChecking(int checking) {
             Checking = checking;
         }
     }

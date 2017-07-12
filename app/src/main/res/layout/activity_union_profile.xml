@@ -25,9 +25,9 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/profile_image"
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="120dp"
-                android:src="@drawable/sallam"/>
+                android:src="@drawable/profile_place_holder"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
@@ -101,7 +101,7 @@
                 android:src="@drawable/email"/>
 
             <com.example.boghdady.campusapp.helper.CustomTextView
-                android:id="@id/textView1"
+
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_toEndOf="@+id/email_image"
@@ -144,7 +144,6 @@
                 android:src="@drawable/phone"/>
 
             <com.example.boghdady.campusapp.helper.CustomTextView
-                android:id="@id/textView2"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_toEndOf="@+id/phone_image"
@@ -186,7 +185,6 @@
                 android:src="@drawable/ic_map_marker"/>
 
             <com.example.boghdady.campusapp.helper.CustomTextView
-                android:id="@id/textView3"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_toEndOf="@+id/location_image"

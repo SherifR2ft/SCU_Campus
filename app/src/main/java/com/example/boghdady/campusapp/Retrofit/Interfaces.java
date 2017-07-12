@@ -29,4 +29,14 @@ public class Interfaces {
         @GET("Campus/Get_All_Locations.php")
         Call<Responses.LocationPlacesResponse> getPlacesLoaction();
     }
+
+    public interface User_Login{
+        @POST("Campus/Login.php")
+        Call<Responses.SignupResponse> userLogin(@Body SentBody.LoginBody loginBody);
+    }
+
+    public interface Update_User{
+        @POST("Campus/Update_User.php")
+        Call<Responses.DefaultResponse> update_user(@Body SentBody.UpdateUserBody updateUserBody);
+    }
 }

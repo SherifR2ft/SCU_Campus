@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.boghdady.campusapp.Notification_list;
 import com.example.boghdady.campusapp.R;
 import com.example.boghdady.campusapp.StudentScreen.StudentCreateEvent;
+import com.example.boghdady.campusapp.StudentScreen.StudentProfile;
 import com.example.boghdady.campusapp.Tabedactivity;
 import com.example.boghdady.campusapp.helper.Constants;
 import com.example.boghdady.campusapp.helper.CustomTextView;
@@ -67,11 +68,11 @@ public class StudentNavigationDrawer extends AppCompatActivity
 
             void SetStudentImageAndName ()
             {
-                String userImg = sharedPref.getStudentImage();
+                String userImg = sharedPref.getString("student_image");
                 if (!userImg.equalsIgnoreCase("")) {
 
                     Glide.with(StudentNavigationDrawer.this)
-                            .load(Constants.IMAGES_URL + sharedPref.getStudentImage())
+                            .load(Constants.IMAGES_URL + userImg)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .centerCrop()
                             .crossFade()
@@ -131,19 +132,28 @@ public class StudentNavigationDrawer extends AppCompatActivity
                 int id = item.getItemId();
 
 
-                if (id == R.id.study_table) {
+                if (id == R.id.student_table) {
                     Intent in = new Intent(StudentNavigationDrawer.this, Tabedactivity.class);
                     startActivity(in);
 
-                } else if (id == R.id.free_places) {
+                } else if (id == R.id.student_notification) {
 
-                } else if (id == R.id.creat_events) {
+                } else if (id == R.id.student_creat_events) {
                     Intent i = new Intent(StudentNavigationDrawer.this, StudentCreateEvent.class);
                     startActivity(i);
 
-                } else if (id == R.id.share) {
+                } else if (id == R.id.student_events) {
+
+                }else if (id == R.id.student_settings) {
+                    Intent i = new Intent(StudentNavigationDrawer.this , StudentProfile.class);
+                    startActivity(i);
+                }
+                else if (id == R.id.student_share) {
 
                 }
+
+
+
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.student_drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

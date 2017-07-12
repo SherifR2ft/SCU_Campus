@@ -6,12 +6,18 @@
     <string name="choose_app">اختر التطبيق</string>
     <string name="cancel">الغاء</string>
     <string name="gallery">معرض الصور</string>
+    <string name="subject">المادة</string>
     <string name="camera">الكاميرا</string>
+    <string name="select_time">اختر الوقت</string>
     <string name="perrmission">Please Enable All Perrmissions</string>
     <string name="categories">الاقسام</string>
     <string name="new_user">مستخدم جديد ؟ سجل الأن</string>
     <string name="phone_number">رقم الهاتف</string>
     <string name="create_account">إنشاء حساب</string>
+    <string name="my_account">حسابي</string>
+    <string name="save_updates">حفظ</string>
+    <string name="edit_image">تعديل الصورة</string>
+    <string name="run_notification">تفعيل الاشعارات</string>
     <string name="already_user">مستخدم ؟ سجل دخولك الأن</string>
     <string name="please_wait">Please wait...</string>
     <string name="check_your_internet">حدث خطأ ما !! برجاء التأكد من الاتصال بالانترنت .</string>
@@ -44,6 +50,7 @@
     <string name="please_enter_right_event_location">من فضلك ادخل موقع الايفينت</string>
     <string name="event_added_successfully">تم إضافة الايفينت بنجاح</string>
     <string name="wrong">حدث خطأ ! الرجاء المحاولة مرة اخرى</string>
+    <string name="send_notification">ارسال اشعار</string>
 
 
     <string name="action_settings">Settings</string>

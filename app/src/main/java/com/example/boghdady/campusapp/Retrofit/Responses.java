@@ -29,6 +29,7 @@ public class Responses {
             this.success = success;
         }
     }
+//----------------------------------------------------------------------------------------------------------
 
     public static class DefaultResponse{
         int success;
@@ -53,35 +54,69 @@ public class Responses {
 
 //---------------------------------------------------------------------------------------------------------
 
-    public  static class  SignupResponse{
-        List<Models.UserModel> Users;
-        int success;
-        String message;
+public static class LoginResponse{
+    int success;
+    String message;
+    String checking;
 
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public List<Models.UserModel> getUserModels() {
-            return Users;
-        }
-
-        public void setUserModels(List<Models.UserModel> userModels) {
-            this.Users = userModels;
-        }
-
-        public int getSuccess() {
-            return success;
-        }
-
-        public void setSuccess(int success) {
-            this.success = success;
-        }
+    public int getSuccess() {
+        return success;
     }
+
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
+    public String getChecking() {
+        return checking;
+    }
+
+    public void setChecking(String checking) {
+        this.checking = checking;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
+//---------------------------------------------------------------------------------------------------------------
+    public  static class  SignupResponse{
+
+
+
+    Models.UserModel user;
+
+    public Models.UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(Models.UserModel user) {
+        this.user = user;
+    }
+
+    int success;
+    String message;
+
+    public int getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------

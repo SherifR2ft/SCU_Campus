@@ -4,25 +4,25 @@
     <item android:title="@string/student">
         <menu>
             <item
-                android:id="@+id/study_table"
+                android:id="@+id/student_table"
                 android:icon="?android:attr/actionModePasteDrawable"
                 android:title="@string/schedule"/>
             <item
-                android:id="@+id/free_places"
+                android:id="@+id/student_notification"
                 android:icon="@android:drawable/presence_online"
-                android:title="@string/free_halls"/>
+                android:title="@string/notifications"/>
         </menu>
     </item>
 
     <item android:title="@string/events">
         <menu>
             <item
-                android:id="@+id/creat_events"
+                android:id="@+id/student_creat_events"
                 android:title="@string/create_event"
                 android:icon="@android:drawable/ic_menu_edit"
                 />
             <item
-                android:id="@+id/events"
+                android:id="@+id/student_events"
                 android:icon="@android:drawable/ic_menu_my_calendar"
                 android:title="@string/view_events"/>
 
@@ -34,7 +34,11 @@
     <item android:title="@string/contact_us">
         <menu>
             <item
-                android:id="@+id/share"
+                android:id="@+id/student_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/settings"/>
+            <item
+                android:id="@+id/student_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/share_app"/>
            

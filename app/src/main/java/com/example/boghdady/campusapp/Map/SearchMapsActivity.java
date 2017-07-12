@@ -72,6 +72,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
     public Polyline SCU_Boundary;
     //  SCU latitude and longitude coordinates
     LatLng SCU_Location = new LatLng(30.623109, 32.2729409);
+    LatLng SCU_Location_icon = new LatLng(30.62336, 32.26101);
 
     final int MY_LOCATION_REQUEST_CODE = 25;
     private LocationRequest mLocationRequest;
@@ -195,6 +196,8 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
                 drawSCU_Boundary();
+
+
             }
 
         });
@@ -582,7 +585,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         return places.get(text.toString());
     }
     //------------- last ------------
-       /* Draw Boundary of SCU
+        /* Draw Boundary of SCU
           get latitude and longitude coordinates of pointes
           https://developers.google.com/maps/documentation/utilities/polylineutility*/
     public void drawSCU_Boundary() {
@@ -605,7 +608,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
                 .visible(true)
                 .width(5)
                 .color(Color.RED));
-        draw_polygon();
+        // draw_polygon();
     }
     // .add(new LatLng(,),new LatLng(,))
 
@@ -638,15 +641,14 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
     // Add an overlay to the map, retaining a handle to the GroundOverlay object.
-    public void add_or_remove_GroundOverlay(LatLng location, Boolean condition) {
+    public void add_or_remove_GroundOverlay(LatLng location, Boolean condition, Float width, Float height, String logo_name) {
         GroundOverlayOptions newarkMap = new GroundOverlayOptions()
                 .clickable(true)
                 .transparency(.7f)
-
-
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.logo))
+                .image(BitmapDescriptorFactory.fromResource(getResources()
+                        .getIdentifier(logo_name, "drawable", this.getPackageName())))
                 //position(LatLng location, float width, float height)
-                .position(location, 2500f, 2500f);
+                .position(location, width, height);
         GroundOverlay imageOverlay = mMap.addGroundOverlay(newarkMap);
         if (condition == Boolean.FALSE) {
             // remove a ground overlay
@@ -659,22 +661,45 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
+    void add_or_remove_GroundOverlay(LatLng location, Boolean condition, Float width, Float height, String logo_name, Float bearing, Float transparency) {
+        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+                .clickable(true)
+                .transparency(transparency)
+                .image(BitmapDescriptorFactory.fromResource(getResources()
+                        .getIdentifier(logo_name, "drawable", this.getPackageName())))
+                //position(LatLng location, float width, float height)
+                .position(location, width, height)
+                .bearing(bearing);
+        GroundOverlay imageOverlay = mMap.addGroundOverlay(newarkMap);
+        if (condition == Boolean.FALSE) {
+            // remove a ground overlay
+            imageOverlay.remove();
+
+        } else {
+            mMap.addGroundOverlay(newarkMap);
+        }
+    }
+
     public void handleZoom_GroundOverlay_Boundary() {
 
 
         float zoom = mMap.getCameraPosition().zoom;
         if (zoom < 15f) {
-            add_or_remove_GroundOverlay(SCU_Location, Boolean.TRUE);
+            Building_logo_off();
+            mMap.clear();
+            add_or_remove_GroundOverlay(SCU_Location_icon, Boolean.TRUE, 2000f, 2500f, "logo", 280f, 0f);
 
             if (
                     SCU_Boundary.isVisible()) {
                 hideSCU_Boundary();
+
             }
 
         } else {
-            add_or_remove_GroundOverlay(SCU_Location, Boolean.FALSE);
+            add_or_remove_GroundOverlay(SCU_Location_icon, Boolean.FALSE, 2000f, 2500f, "logo");
             mMap.clear();
             drawSCU_Boundary();
+            Building_logo_on();
 
         }
     }
@@ -691,11 +716,170 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         GroundOverlayOptions newarkMap2 = new GroundOverlayOptions()
 
 
-
-
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.logo))
                 //position(LatLng location, float width, float height)
                 .position(fci_p, 25f, 25f);
         GroundOverlay imageOverlay2 = mMap.addGroundOverlay(newarkMap2);
+    }
+
+
+    // logo of faculties
+    public void Building_logo_on() {
+        LatLng fci = new LatLng(30.62116, 32.2684);
+
+        LatLng alsun = new LatLng(30.62085, 32.27500);
+
+        LatLng sciences = new LatLng(30.62185, 32.27217);
+
+        LatLng engineering = new LatLng(30.62534, 32.2719);
+
+        LatLng confucius_institute = new LatLng(30.62409, 32.27322);
+
+        LatLng development_center = new LatLng(30.62333, 32.27288);
+
+        LatLng main_gate = new LatLng(30.62023, 32.26946);
+
+        LatLng veterinary = new LatLng(30.62527, 32.26752);
+
+        LatLng dentistry_gate = new LatLng(30.62059, 32.27915);
+
+        LatLng agriculture = new LatLng(30.61992, 32.27262);
+
+        LatLng othman_hall = new LatLng(30.62081, 32.27033);
+
+        LatLng mosque = new LatLng(30.62172, 32.27043);
+
+        LatLng dome_building = new LatLng(30.62301, 32.26906);
+
+        LatLng pharmacy = new LatLng(30.62297, 32.2774);
+
+        LatLng dentistry = new LatLng(30.62276, 32.27599);
+
+        LatLng education = new LatLng(30.62473, 32.27786);
+
+        LatLng medicine = new LatLng(30.62538, 32.27958);
+
+        LatLng youth_care = new LatLng(30.62377, 32.27362);
+
+        LatLng commerce = new LatLng(30.62414, 32.27104);
+
+        LatLng theater = new LatLng(30.62377, 32.2697);
+
+        LatLng othman_gate = new LatLng(30.6193, 32.27175);
+
+        LatLng stadium_complex = new LatLng(30.6242, 32.27575);
+
+        LatLng university_city = new LatLng(30.62617, 32.27673);
+
+        LatLng university_city_football = new LatLng(30.62669, 32.27873);
+
+        LatLng university_hospital = new LatLng(30.62237, 32.28135);
+
+
+        add_or_remove_GroundOverlay(fci, Boolean.TRUE, 50f, 50f, "fci");
+        add_or_remove_GroundOverlay(alsun, Boolean.TRUE, 50f, 50f, "alsun");
+        add_or_remove_GroundOverlay(sciences, Boolean.TRUE, 50f, 50f, "sciences");
+        add_or_remove_GroundOverlay(engineering, Boolean.TRUE, 50f, 50f, "handsa");
+        add_or_remove_GroundOverlay(confucius_institute, Boolean.TRUE, 50f, 50f, "conf");
+        add_or_remove_GroundOverlay(development_center, Boolean.TRUE, 50f, 50f, "oloom");
+        add_or_remove_GroundOverlay(main_gate, Boolean.TRUE, 50f, 50f, "main_gate");
+        add_or_remove_GroundOverlay(veterinary, Boolean.TRUE, 50f, 50f, "veterinary");
+        add_or_remove_GroundOverlay(dentistry_gate, Boolean.TRUE, 50f, 50f, "unvier");
+        add_or_remove_GroundOverlay(agriculture, Boolean.TRUE, 50f, 50f, "agriculture");
+        add_or_remove_GroundOverlay(othman_hall, Boolean.TRUE, 50f, 50f,"unvier");
+        add_or_remove_GroundOverlay(mosque, Boolean.TRUE, 100f, 100f, "masjid");
+        add_or_remove_GroundOverlay(dome_building, Boolean.TRUE, 50f, 50f, "dome");
+        add_or_remove_GroundOverlay(pharmacy, Boolean.TRUE, 50f, 50f, "saydla");
+        add_or_remove_GroundOverlay(dentistry, Boolean.TRUE, 50f, 50f, "unvier");
+        add_or_remove_GroundOverlay(education, Boolean.TRUE, 50f, 50f, "adaab");
+        add_or_remove_GroundOverlay(medicine, Boolean.TRUE, 50f, 50f, "medicen");
+        add_or_remove_GroundOverlay(youth_care, Boolean.TRUE, 50f, 50f, "unvier");
+        add_or_remove_GroundOverlay(commerce, Boolean.TRUE, 50f, 50f, "commerce");
+        add_or_remove_GroundOverlay(theater, Boolean.TRUE, 50f, 50f, "theater");
+        add_or_remove_GroundOverlay(othman_gate, Boolean.TRUE, 50f, 50f, "unvier");
+        add_or_remove_GroundOverlay(stadium_complex, Boolean.TRUE, 50f, 50f, "football");
+        add_or_remove_GroundOverlay(university_city, Boolean.TRUE, 50f, 50f, "unvier");
+        add_or_remove_GroundOverlay(university_city_football, Boolean.TRUE, 50f, 50f, "football");
+        add_or_remove_GroundOverlay(university_hospital, Boolean.TRUE, 50f, 50f, "hospital");
+
+
+    }
+
+    public void Building_logo_off() {
+        LatLng fci = new LatLng(30.62116, 32.2684);
+
+        LatLng alsun = new LatLng(30.62085, 32.27500);
+
+        LatLng sciences = new LatLng(30.62185, 32.27217);
+
+        LatLng engineering = new LatLng(30.62534, 32.2719);
+
+        LatLng confucius_institute = new LatLng(30.62409, 32.27322);
+
+        LatLng development_center = new LatLng(30.62333, 32.27288);
+
+        LatLng main_gate = new LatLng(30.62023, 32.26946);
+
+        LatLng veterinary = new LatLng(30.62527, 32.26752);
+
+        LatLng dentistry_gate = new LatLng(30.62059, 32.27915);
+
+        LatLng agriculture = new LatLng(30.61992, 32.27262);
+
+        LatLng othman_hall = new LatLng(30.62081, 32.27033);
+
+        LatLng mosque = new LatLng(30.62172, 32.27043);
+
+        LatLng dome_building = new LatLng(30.62301, 32.26906);
+
+        LatLng pharmacy = new LatLng(30.62297, 32.2774);
+
+        LatLng dentistry = new LatLng(30.62276, 32.27599);
+
+        LatLng education = new LatLng(30.62473, 32.27786);
+
+        LatLng medicine = new LatLng(30.62538, 32.27958);
+
+        LatLng youth_care = new LatLng(30.62377, 32.27362);
+
+        LatLng commerce = new LatLng(30.62414, 32.27104);
+
+        LatLng theater = new LatLng(30.62377, 32.2697);
+
+        LatLng othman_gate = new LatLng(30.6193, 32.27175);
+
+        LatLng stadium_complex = new LatLng(30.6242, 32.27575);
+
+        LatLng university_city = new LatLng(30.62617, 32.27673);
+
+        LatLng university_city_football = new LatLng(30.62669, 32.27873);
+
+        LatLng university_hospital = new LatLng(30.62237, 32.28135);
+
+        add_or_remove_GroundOverlay(fci, Boolean.FALSE, 200f, 250f, "fci");
+        add_or_remove_GroundOverlay(alsun, Boolean.FALSE, 50f, 50f, "alsun");
+        add_or_remove_GroundOverlay(sciences, Boolean.FALSE, 50f, 50f, "sciences");
+        add_or_remove_GroundOverlay(engineering, Boolean.FALSE, 200f, 250f, "handsa");
+        add_or_remove_GroundOverlay(confucius_institute, Boolean.FALSE, 200f, 250f, "conf");
+        add_or_remove_GroundOverlay(development_center, Boolean.FALSE, 200f, 250f, "oloom");
+        add_or_remove_GroundOverlay(main_gate, Boolean.FALSE, 200f, 250f, "main_gate");
+        add_or_remove_GroundOverlay(veterinary, Boolean.FALSE, 200f, 250f, "veterinary");
+        add_or_remove_GroundOverlay(dentistry_gate, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(agriculture, Boolean.FALSE, 200f, 250f, "agriculture");
+        add_or_remove_GroundOverlay(othman_hall, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(mosque, Boolean.FALSE, 200f, 250f, "masjid");
+        add_or_remove_GroundOverlay(dome_building, Boolean.FALSE, 200f, 250f, "dome");
+        add_or_remove_GroundOverlay(pharmacy, Boolean.FALSE, 200f, 250f, "saydla");
+        add_or_remove_GroundOverlay(dentistry, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(education, Boolean.FALSE, 200f, 250f, "adaab");
+        add_or_remove_GroundOverlay(medicine, Boolean.FALSE, 200f, 250f, "medicen");
+        add_or_remove_GroundOverlay(youth_care, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(commerce, Boolean.FALSE, 200f, 250f, "commerce");
+        add_or_remove_GroundOverlay(theater, Boolean.FALSE, 200f, 250f, "theater");
+        add_or_remove_GroundOverlay(othman_gate, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(stadium_complex, Boolean.FALSE, 200f, 250f, "football");
+        add_or_remove_GroundOverlay(university_city, Boolean.FALSE, 200f, 250f, "unvier");
+        add_or_remove_GroundOverlay(university_city_football, Boolean.FALSE, 200f, 250f, "football");
+        add_or_remove_GroundOverlay(university_hospital, Boolean.FALSE, 200f, 250f, "hospital");
     }
 }

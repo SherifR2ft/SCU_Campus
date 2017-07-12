@@ -89,122 +89,122 @@ public class StudentSignupActivity extends AbstractRunTimePermission {
             }
         });
 
-        StudentSignup();
+//        StudentSignup();
 
     }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
-    void StudentSignup()
-    {
-        signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userName = ed_studentName.getText().toString();
-                email = ed_studentEmail.getText().toString();
-                password = ed_studentPassword.getText().toString();
-                faculty = ed_FacultyName.getText().toString();
-                phone = ed_studentPhone.getText().toString();
-                String check = "0";
-
-                boolean validated = true;
-                if (userName.equalsIgnoreCase("")) {
-                    validated = false;
-                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_user_name, Toast.LENGTH_SHORT).show();
-                }
-                if (email.equalsIgnoreCase("")) {
-                    validated = false;
-                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_email, Toast.LENGTH_SHORT).show();
-                }
-                if (password.equalsIgnoreCase("")) {
-                    validated = false;
-                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_password, Toast.LENGTH_SHORT).show();
-                }
-                if (phone.equalsIgnoreCase("")) {
-                    validated = false;
-                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_phone, Toast.LENGTH_SHORT).show();
-                }
-                if (validated) {
-
-                    pDialog = new ProgressDialog(StudentSignupActivity.this);
-                    pDialog.setMessage(getString(R.string.please_wait));
-                    pDialog.setCancelable(false);
-                    pDialog.show();
-
-                    Gson gson = new GsonBuilder()
-                            .setLenient()
-                            .create();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(Constants.BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create(gson))
-                            .build();
-                    Interfaces.User_RegisterAPI registerInterface=retrofit.create(Interfaces.User_RegisterAPI.class);
-                    Call<Responses.SignupResponse> call=registerInterface.insertUser(new SentBody.UserOperationBody(userName,email,password,ba1,phone,faculty , StudyYear_Spinner,Department_Spinner,Section_Spinner , check));
-                    call.enqueue(new Callback<Responses.SignupResponse>() {
-                        @Override
-                        public void onResponse(Call<Responses.SignupResponse> call, Response<Responses.SignupResponse> response) {
-                            try {
-                                if (response.body().getUserModels()!=null){
-
-                                    SharedPref sharedPref=SharedPref.getInstance(getApplicationContext());
-                                    Models.UserModel userModel = response.body().getUserModels().get(0);
-                                    sharedPref.putString("student_id",userModel.getUser_ID());
-                                    sharedPref.putString("student_name",userModel.getUser_Name());
-                                    sharedPref.setStudentImage(userModel.getUser_Image());
-                                    sharedPref.putString("student_email",userModel.getUser_Email());
-                                    sharedPref.putString("student_phone",userModel.getUser_Phone());
-                                    sharedPref.putString("student_faculty",userModel.getUser_Faculty());
-                                    sharedPref.putString("student_password",userModel.getUser_Password());
-                                    sharedPref.putString("student_section",userModel.getUser_Section());
-                                    sharedPref.putString("student_department",userModel.getDepartment());
-                                    sharedPref.putString("student_study_year",userModel.getStudy_Year());
-                                    sharedPref.putString("checking",userModel.getChecking());
-
-//                                    String token = FirebaseInstanceId.getInstance().getToken();
-//                                    if(token != null){
-//                                        Token.sendTokenToServer(getBaseContext(), token);
-//                                    }
-                                    Intent intent=new Intent(StudentSignupActivity.this,StudentNavigationDrawer.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                if (response.body().getSuccess()==0){
-                                    Toast.makeText(StudentSignupActivity.this, " "+response.body().getMessage(), Toast.LENGTH_LONG).show();
-                                    pDialog.dismiss();
-                                }
-                                pDialog.dismiss();
-                            }catch (Exception e){
-                                e.getMessage();
-                                pDialog.dismiss();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<Responses.SignupResponse> call, Throwable t) {
-                            try {
-                                Toast.makeText(StudentSignupActivity.this, R.string.check_your_internet, Toast.LENGTH_SHORT).show();
-                                pDialog.dismiss();
-                            }catch (Exception e){
-                                pDialog.dismiss();
-                            }
-                        }
-                    });
-                }
-            }
-        });
-
-        // get user image
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    requestAppPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.MANAGE_DOCUMENTS}, R.string.perrmission, ACCESS_STORAGE_PERMISSIONS_REQUEST);
-                } else {
-                    getImage();
-                }
-            }
-        });
-    }
+//    void StudentSignup()
+//    {
+//        signupBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                userName = ed_studentName.getText().toString();
+//                email = ed_studentEmail.getText().toString();
+//                password = ed_studentPassword.getText().toString();
+//                faculty = ed_FacultyName.getText().toString();
+//                phone = ed_studentPhone.getText().toString();
+//                String check = "0";
+//
+//                boolean validated = true;
+//                if (userName.equalsIgnoreCase("")) {
+//                    validated = false;
+//                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_user_name, Toast.LENGTH_SHORT).show();
+//                }
+//                if (email.equalsIgnoreCase("")) {
+//                    validated = false;
+//                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_email, Toast.LENGTH_SHORT).show();
+//                }
+//                if (password.equalsIgnoreCase("")) {
+//                    validated = false;
+//                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_right_password, Toast.LENGTH_SHORT).show();
+//                }
+//                if (phone.equalsIgnoreCase("")) {
+//                    validated = false;
+//                    Toast.makeText(StudentSignupActivity.this, R.string.please_enter_phone, Toast.LENGTH_SHORT).show();
+//                }
+//                if (validated) {
+//
+//                    pDialog = new ProgressDialog(StudentSignupActivity.this);
+//                    pDialog.setMessage(getString(R.string.please_wait));
+//                    pDialog.setCancelable(false);
+//                    pDialog.show();
+//
+//                    Gson gson = new GsonBuilder()
+//                            .setLenient()
+//                            .create();
+//                    Retrofit retrofit = new Retrofit.Builder()
+//                            .baseUrl(Constants.BASE_URL)
+//                            .addConverterFactory(GsonConverterFactory.create(gson))
+//                            .build();
+//                    Interfaces.User_RegisterAPI registerInterface=retrofit.create(Interfaces.User_RegisterAPI.class);
+//                    Call<Responses.SignupResponse> call=registerInterface.insertUser(new SentBody.UserOperationBody(userName,email,password,ba1,phone,faculty , StudyYear_Spinner,Department_Spinner,Section_Spinner , check));
+//                    call.enqueue(new Callback<Responses.SignupResponse>() {
+//                        @Override
+//                        public void onResponse(Call<Responses.SignupResponse> call, Response<Responses.SignupResponse> response) {
+//                            try {
+//                                if (response.body().getUserModels()!=null){
+//
+//                                    SharedPref sharedPref=SharedPref.getInstance(getApplicationContext());
+//                                    Models.UserModel userModel = response.body().getUserModels().get(0);
+//                                    sharedPref.putString("student_id",userModel.getUser_ID());
+//                                    sharedPref.putString("student_name",userModel.getUser_Name());
+//                                    sharedPref.setStudentImage(userModel.getUser_Image());
+//                                    sharedPref.putString("student_email",userModel.getUser_Email());
+//                                    sharedPref.putString("student_phone",userModel.getUser_Phone());
+//                                    sharedPref.putString("student_faculty",userModel.getUser_Faculty());
+//                                    sharedPref.putString("student_password",userModel.getUser_Password());
+//                                    sharedPref.putString("student_section",userModel.getUser_Section());
+//                                    sharedPref.putString("student_department",userModel.getDepartment());
+//                                    sharedPref.putString("student_study_year",userModel.getStudy_Year());
+//                                    sharedPref.putString("checking",userModel.getChecking());
+//
+////                                    String token = FirebaseInstanceId.getInstance().getToken();
+////                                    if(token != null){
+////                                        Token.sendTokenToServer(getBaseContext(), token);
+////                                    }
+//                                    Intent intent=new Intent(StudentSignupActivity.this,StudentNavigationDrawer.class);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                                if (response.body().getSuccess()==0){
+//                                    Toast.makeText(StudentSignupActivity.this, " "+response.body().getMessage(), Toast.LENGTH_LONG).show();
+//                                    pDialog.dismiss();
+//                                }
+//                                pDialog.dismiss();
+//                            }catch (Exception e){
+//                                e.getMessage();
+//                                pDialog.dismiss();
+//                            }
+//                        }
+//                        @Override
+//                        public void onFailure(Call<Responses.SignupResponse> call, Throwable t) {
+//                            try {
+//                                Toast.makeText(StudentSignupActivity.this, R.string.check_your_internet, Toast.LENGTH_SHORT).show();
+//                                pDialog.dismiss();
+//                            }catch (Exception e){
+//                                pDialog.dismiss();
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//
+//        // get user image
+//        profileImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    requestAppPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.MANAGE_DOCUMENTS}, R.string.perrmission, ACCESS_STORAGE_PERMISSIONS_REQUEST);
+//                } else {
+//                    getImage();
+//                }
+//            }
+//        });
+//    }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.boghdady.campusapp.DoctorScreen.DoctorCreateEvent;
+import com.example.boghdady.campusapp.DoctorScreen.DoctorProfile;
 import com.example.boghdady.campusapp.Notification_list;
 import com.example.boghdady.campusapp.R;
 import com.example.boghdady.campusapp.StudentScreen.StudentCreateEvent;
@@ -59,20 +61,22 @@ public class DoctorNavigationDrawer extends AppCompatActivity
     }
 
 //-----------------------------------------------------------------------------------------------------------------------
-    // method to get doctor image and doctor name form shared preferance
+    // method to get student image and student name form shared preferance
 
-    void  SetDoctorImageAndName(){
-        String userImg=sharedPref.getDoctorImage();
-        if(!userImg.equalsIgnoreCase("") ){
+    void SetDoctorImageAndName ()
+    {
+        String userImg = sharedPref.getString("doctor_image");
+        if (!userImg.equalsIgnoreCase("")) {
+
             Glide.with(DoctorNavigationDrawer.this)
-                    .load(Constants.IMAGES_URL+sharedPref.getDoctorImage())
+                    .load(Constants.IMAGES_URL + userImg)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .crossFade()
                     .dontAnimate()
                     .into(profileImage);
             userName.setText(sharedPref.getString("doctor_name"));
-        }else{
+        } else {
             profileImage.setImageDrawable(getResources().getDrawable(R.drawable.profile_place_holder));
         }
     }
@@ -118,15 +122,22 @@ public boolean onCreateOptionsMenu(Menu menu) {
         int id = item.getItemId();
 
 
-        if(id == R.id.study_table) {
+        if(id == R.id.doctor_study_table) {
 
-        } else if(id == R.id.free_places) {
-
-        } else if(id == R.id.creat_events) {
-            Intent i = new Intent(DoctorNavigationDrawer.this , StudentCreateEvent.class);
+        }
+        else if(id == R.id.doctor_creat_events) {
+            Intent i = new Intent(DoctorNavigationDrawer.this , DoctorCreateEvent.class);
             startActivity(i);
 
-        } else if(id == R.id.share) {
+        }
+        else if(id == R.id.doctor_events) {
+
+        }
+        else if(id == R.id.doctor_settings) {
+            Intent i = new Intent(DoctorNavigationDrawer.this , DoctorProfile.class);
+            startActivity(i);
+        }
+        else if(id == R.id.doctor_share) {
 
         }
 

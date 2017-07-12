@@ -4,27 +4,30 @@
     <item android:title="ألدكتور">
         <menu>
             <item
-                android:id="@+id/study_table"
+                android:id="@+id/doctor_study_table"
                 android:icon="?android:attr/actionModePasteDrawable"
                 android:title="@string/schedule"/>
+
             <item
-                android:id="@+id/free_places"
-                android:icon="@android:drawable/presence_online"
-                android:title="@string/free_halls"/>
+                android:id="@+id/doctor_send_notification"
+                android:icon="@drawable/ic_notifications_black_24dp"
+                android:title="@string/send_notification"/>
+
         </menu>
     </item>
 
     <item android:title="الايفنتات">
         <menu>
             <item
-                android:id="@+id/creat_events"
+                android:id="@+id/doctor_creat_events"
                 android:title="اضافة ايفينت"
                 android:icon="@android:drawable/ic_menu_edit"
                 />
             <item
-                android:id="@+id/events"
+                android:id="@+id/doctor_events"
                 android:icon="@android:drawable/ic_menu_my_calendar"
                 android:title="@string/view_events"/>
+
 
         </menu>
 
@@ -34,9 +37,15 @@
     <item android:title="تواصل معنا">
         <menu>
             <item
-                android:id="@+id/share"
+                android:id="@+id/doctor_settings"
+                android:icon="@android:drawable/presence_online"
+                android:title="@string/settings"/>
+
+            <item
+                android:id="@+id/doctor_share"
                 android:icon="?attr/actionModeShareDrawable"
                 android:title="@string/share_app"/>
+
 
         </menu>
     </item>
