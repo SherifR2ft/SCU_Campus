@@ -454,7 +454,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(10);
+                lineOptions.width(7);
                 lineOptions.color(Color.RED);
 
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");

@@ -1,15 +1,5 @@
 [
   {
-    "stylers": [
-      {
-        "saturation": -5
-      },
-      {
-        "weight": 1
-      }
-    ]
-  },
-  {
     "elementType": "geometry",
     "stylers": [
       {
@@ -44,6 +34,17 @@
   },
   {
     "featureType": "poi",
+    "stylers": [
+      {
+        "color": "#263d57"
+      },
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
     "elementType": "labels.text.fill",
     "stylers": [
       {
@@ -60,8 +61,17 @@
     ]
   },
   {
-    "featureType": "poi.medical",
+    "featureType": "poi.business",
     "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
+    "elementType": "labels",
     "stylers": [
       {
         "visibility": "off"
@@ -73,7 +83,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#234331"
+        "color": "#21452d"
       }
     ]
   },
@@ -99,7 +109,10 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#56360c"
+        "saturation": 95
+      },
+      {
+        "lightness": 100
       }
     ]
   },
@@ -108,7 +121,16 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#56360c"
+        "color": "#4e5403"
+      },
+      {
+        "saturation": 95
+      },
+      {
+        "lightness": 100
+      },
+      {
+        "weight": 8
       }
     ]
   },
@@ -117,22 +139,18 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#56360c"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.school",
-    "elementType": "labels.icon",
-    "stylers": [
+        "saturation": 95
+      },
       {
-        "visibility": "off"
+        "lightness": 100
+      },
+      {
+        "weight": 8
       }
     ]
   },
   {
-    "featureType": "poi.school",
-    "elementType": "labels.text",
+    "featureType": "poi.sports_complex",
     "stylers": [
       {
         "visibility": "off"
@@ -167,6 +185,24 @@
     ]
   },
   {
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "weight": 3.5
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "weight": 1
+      }
+    ]
+  },
+  {
     "featureType": "road.highway",
     "elementType": "geometry",
     "stylers": [
@@ -181,6 +217,9 @@
     "stylers": [
       {
         "color": "#1f2835"
+      },
+      {
+        "weight": 1
       }
     ]
   },
@@ -190,6 +229,48 @@
     "stylers": [
       {
         "color": "#f3d19c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "weight": 1.5
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "saturation": -5
+      },
+      {
+        "lightness": 5
+      },
+      {
+        "weight": 2.5
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "weight": 1
       }
     ]
   },
