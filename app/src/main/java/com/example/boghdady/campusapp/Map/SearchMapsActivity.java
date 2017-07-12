@@ -3,13 +3,13 @@ package com.example.boghdady.campusapp.Map;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
@@ -151,14 +152,21 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-//        //add style to the map using json
-//        boolean success = mMap.setMapStyle(new MapStyleOptions(getResources()
-//                .getString(R.string.style_json)));
-//        if (!success) {
-//
-//            Log.e(TAG, "Style parsing failed.");
-//
-//        }
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style));
+
+            if (!success) {
+                Log.e("MapsActivityRaw", "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("MapsActivityRaw", "Can't find style.", e);
+        }
+
+
         //make Zoom (In/Out) Buttons appear
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
