@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -169,7 +171,8 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         //make Zoom (In/Out) Buttons appear
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        //add all markers on all faculty
+        add_all_makrers();
         //  SCU latitude and longitude coordinates
         //  LatLng SCU_Location = new LatLng(30.623109, 32.2729409);
 
@@ -614,7 +617,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
                 .add(new LatLng(30.62108, 32.26666), new LatLng(30.61874, 32.25556))
                 .add(new LatLng(30.61874, 32.25556), new LatLng(30.617601379370974, 32.25452899932861))
                 .visible(true)
-                .width(5)
+                .width(7)
                 .color(Color.RED));
         // draw_polygon();
     }
@@ -708,6 +711,7 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
             mMap.clear();
             drawSCU_Boundary();
             Building_logo_on();
+            add_all_makrers();
 
         }
     }
@@ -889,5 +893,166 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         add_or_remove_GroundOverlay(university_city, Boolean.FALSE, 200f, 250f, "unvier");
         add_or_remove_GroundOverlay(university_city_football, Boolean.FALSE, 200f, 250f, "football");
         add_or_remove_GroundOverlay(university_hospital, Boolean.FALSE, 200f, 250f, "hospital");
+    }
+    //  resizes your bitmap and returns the resized bitmap
+    public Bitmap resizeBitmap(String drawableName, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory
+                .decodeResource(getResources(), getResources().getIdentifier(drawableName, "drawable", getPackageName()));
+        return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+    }
+
+    //marker of FCI
+    public void add_marker_fci() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of Computers and Information")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("fci"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+
+    //    marker of Alsun
+    public void add_marker_alsun() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of alsun")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("alsun"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //commerce
+    public void add_marker_commerce() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of commerce")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("commerce"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //medicine
+    public void add_marker_medicine() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of medicine")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("medicine"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //education
+    public void add_marker_education() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of education")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("education"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //dentistry
+    public void add_marker_dentistry() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of dentistry")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("dentistry"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //pharmacy
+    public void add_marker_pharmacy() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of pharmacy")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("pharmacy"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //agriculture
+    public void add_marker_agriculture() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of agriculture")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("agriculture"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //veterinary
+    public void add_marker_veterinary() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of veterinary")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("veterinary"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+    //engineering
+    public void add_marker_engineering() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of engineering")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("engineering"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+
+    //sciences
+    public void add_marker_sciences() {
+        mMap.addMarker(new MarkerOptions()
+                .title("Faculty of sciences")
+                .snippet("number of marker variable").flat(true)
+                .position(event_marker_coordonate("sciences"))
+                .icon(BitmapDescriptorFactory
+                        .fromBitmap(resizeBitmap("events", 50, 50))));
+
+    }
+
+    //add all marker on faculties
+    public void add_all_makrers() {
+        add_marker_fci();
+        add_marker_alsun();
+        add_marker_sciences();
+        add_marker_engineering();
+        add_marker_veterinary();
+        add_marker_agriculture();
+        add_marker_pharmacy();
+        add_marker_medicine();
+        add_marker_commerce();
+        add_marker_education();
+        add_marker_dentistry();
+    }
+
+    public LatLng event_marker_coordonate(String facultyName) {
+
+        if (facultyName == "fci") {
+            return new LatLng(30.62116 + 0.00023, 32.2684 + 0.00023);
+        } else if (facultyName == "alsun") {
+            return new LatLng(30.62085 + 0.00023, 32.27500 + 0.00023);
+        } else if (facultyName == "sciences") {
+            return new LatLng(30.62185 + 0.00023, 32.27217 + 0.00023);
+        } else if (facultyName == "engineering") {
+            return new LatLng(30.62534 + 0.00023, 32.2719 + 0.00023);
+        } else if (facultyName == "veterinary") {
+            return new LatLng(30.62527 + 0.00023, 32.26752 + 0.00023);
+        } else if (facultyName == "agriculture") {
+            return new LatLng(30.61992 + 0.00023, 32.27262 + 0.00023);
+        } else if (facultyName == "pharmacy") {
+            return new LatLng(30.62297 + 0.00023, 32.2774 + 0.00023);
+        } else if (facultyName == "dentistry") {
+            return new LatLng(30.62276 + 0.00023, 32.27599 + 0.00023);
+        } else if (facultyName == "education") {
+            return new LatLng(30.62473 + 0.00023, 32.27786 + 0.00023);
+        } else if (facultyName == "medicine") {
+            return new LatLng(30.62538 + 0.00023, 32.27958 + 0.00023);
+        } else if (facultyName == "commerce") {
+            return new LatLng(30.62414 + 0.00023, 32.27104 + 0.00023);
+        } else return new LatLng(0, 0);
     }
 }
